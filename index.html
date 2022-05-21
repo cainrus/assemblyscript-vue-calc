@@ -9,14 +9,7 @@
             "vue": "https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.esm.browser.min.js"
         }
     }
-
     </script>
-    <style>
-        body {
-            /*background-color: #000;*/
-            /*color: #fff;*/
-        }
-    </style>
 </head>
 <body>
 <script type="text/x-template" id="calculator">
@@ -36,20 +29,14 @@
     </form>
 </script>
 <div id="app" class="container">
-    <Calculator class="section"/>
+    <Calculator class="section"></Calculator>
 </div>
 
 <script type="module">
     import Vue from 'vue';
     import {add} from "./build/release.js";
 
-
-    console.log(13)
-
-    // document.body.innerText = add(1, 2);
-
     Vue.component('Calculator', {
-        // props: ['termA', 'termB'],
         data() {
             return {
                 termA: 1,
@@ -71,7 +58,6 @@
     new Vue({
         el: '#app'
     })
-
 </script>
 </body>
 </html>

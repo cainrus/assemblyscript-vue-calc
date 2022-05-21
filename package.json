@@ -12,7 +12,7 @@
     "asbuild:release": "asc assembly/index.ts --target release",
     "asbuild": "run-p -n asbuild:*",
     "test": "node tests",
-    "start": "npx serve --help",
+    "start": "npx serve",
     "deploy": "run-s asbuild:release gh-pages",
     "gh-pages": "NODE_DEBUG=gh-pages node scripts/gh-pages.cjs"
   },
