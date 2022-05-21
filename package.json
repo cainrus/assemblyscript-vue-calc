@@ -1,4 +1,5 @@
 {
+  "name": "assemblyscript-vue-calc",
   "type": "module",
   "exports": {
     ".": {
