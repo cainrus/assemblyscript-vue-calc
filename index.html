@@ -1,22 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>AssemblyScript | wasm | vue | calculator </title>
+    <title>AssemblyScript | wasm | vue3 | calculator</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <script type="importmap">
     {
         "imports": {
-            "vue": "https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.esm.browser.min.js"
+            "vue": "https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.35/vue.esm-browser.prod.min.js"
         }
     }
-
     </script>
-    <style>
-        body {
-            /*background-color: #000;*/
-            /*color: #fff;*/
-        }
-    </style>
 </head>
 <body>
 <script type="text/x-template" id="calculator">
@@ -36,20 +29,19 @@
     </form>
 </script>
 <div id="app" class="container">
-    <Calculator class="section"/>
+    <Calculator class="section"></Calculator>
 </div>
 
 <script type="module">
-    import Vue from 'vue';
+    import {
+        createApp,
+        computed,
+    } from 'vue';
+
     import {add} from "./build/release.js";
 
-
-    console.log(13)
-
-    // document.body.innerText = add(1, 2);
-
-    Vue.component('Calculator', {
-        // props: ['termA', 'termB'],
+    const app = createApp({});
+    app.component('Calculator', {
         data() {
             return {
                 termA: 1,
@@ -68,10 +60,7 @@
         }
     });
 
-    new Vue({
-        el: '#app'
-    })
-
+    app.mount('#app');
 </script>
 </body>
 </html>
