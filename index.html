@@ -36,16 +36,33 @@
     import {
         createApp,
         computed,
+        toRefs,
     } from 'vue';
 
-    import {add} from "./build/release.js";
+    import { add } from "./build/release.js";
 
     const app = createApp({});
     app.component('Calculator', {
-        data() {
+
+        props: {
+            termA: {
+                default: 0,
+            },
+            termB: {
+                default: 0,
+            },
+        },
+
+        setup(props) {
+            const {
+                termA,
+                termB,
+            } = toRefs(props);
+            const sum = computed(() => add(termA.value, termB.value));
             return {
-                termA: 1,
-                termB: 2,
+                termA,
+                termB,
+                sum,
             };
         },
         template: '#calculator',
@@ -53,14 +70,9 @@
             termA: 'keyup',
             termB: 'keyup'
         },
-        computed: {
-            sum() {
-                return add(this.termA, this.termB);
-            }
-        }
     });
 
     app.mount('#app');
 </script>
 </body>
-</html>
+</html>;
