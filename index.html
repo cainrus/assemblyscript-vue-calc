@@ -26,6 +26,10 @@
             Sum of AB:
             <input type="number" :value="sum" class="input" disabled>
         </label>
+        <label>
+            Debug mode:
+            <input type="checkbox" v-model="debug">
+        </label>
     </form>
 </script>
 <div id="app" class="container">
@@ -34,12 +38,15 @@
 
 <script type="module">
     import {
+        watchEffect,
         createApp,
         computed,
         toRefs,
+        reactive,
+        ref,
     } from 'vue';
-
-    import { add } from "./build/release.js";
+    import * as releaseApi from "./build/release.js";
+    import * as debugApi from "./build/debug.js";
 
     const app = createApp({});
     app.component('Calculator', {
