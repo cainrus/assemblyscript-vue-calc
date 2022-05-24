@@ -64,22 +64,6 @@ jobs:
     #   If the Autobuild fails above, remove it and uncomment the following three lines. 
     #   modify them (or add more) to build your code if your project, please refer to the EXAMPLE below for guidance.
 
-#     - run: |
-#         echo "Build Application"
-#         npm run install
-#         npm run asbuild:release
-
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
 
-    - name: Cache
-      uses: actions/cache@v3.0.2
-      with:
-        # A list of files, directories, and wildcard patterns to cache and restore
-        path: build/release.*
-        # An explicit key for restoring and saving the cache
-        key: release
-        # An ordered list of keys to use for restoring the cache if no cache hit occurred for key
-        restore-keys: release # optional
-        # The chunk size used to split up large files during upload, in bytes
-        # upload-chunk-size: # optional
