@@ -13,7 +13,7 @@
     "asbuild": "run-p -n asbuild:*",
     "test": "node tests",
     "start": "npx serve",
-    "deploy": "run-s asbuild:release gh-pages",
+    "deploy:gh-pages": "run-s asbuild:release gh-pages",
     "gh-pages": "NODE_DEBUG=gh-pages node scripts/gh-pages.cjs"
   },
   "devDependencies": {
