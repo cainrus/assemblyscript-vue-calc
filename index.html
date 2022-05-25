@@ -14,9 +14,10 @@
 <body>
 <script type="text/x-template" id="calculator">
     <form>
+        <h1 class="subtitle">AssemblyScript Calculator</h1>
         <label class="label">
             Term A:
-            <input type="number" v-model="termA" class="input">
+            <input type="number" v-model="termA" class="input" autofocus>
         </label>
         <label class="label">
             Term B:
@@ -26,14 +27,15 @@
             Sum of AB:
             <input type="number" :value="sum" class="input" readonly>
         </label>
-        <label>
-            Debug mode:
-            <input type="checkbox" v-model="debug">
-        </label>
+        <fieldset class="box has-text-info-light has-background-info">
+            <label>
+                <input type="checkbox" v-model="debug" class="checkbox">
+                Debug mode
+            </label>
+        </fieldset>
     </form>
 </script>
 <div id="app" class="container">
-    <h1>AssemblyScript Calculator</h1>
     <Calculator class="section"></Calculator>
 </div>
 
