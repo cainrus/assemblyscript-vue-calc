@@ -3,7 +3,8 @@ void publish('.', {
     src: [
         'index.html',
         'build/release.*',
-        'build/debug.*'
+        'build/debug.*',
+        'src/app.mjs'
     ]
 }, (err) => {
     if (err) {
