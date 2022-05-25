@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>AssemblyScript | wasm | vue3 | calculator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script type="importmap">
+    {
+        "imports": {
+            "vue": "https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.35/vue.esm-browser.prod.min.js"
+        }
+    }
+    </script>
+</head>
+<body>
+<script type="text/x-template" id="calculator">
+    <form>
+        <label class="label">
+            Term A:
+            <input type="number" v-model="termA" class="input">
+        </label>
+        <label class="label">
+            Term B:
+            <input type="number" v-model="termB" class="input">
+        </label>
+        <label class="label">
+            Sum of AB:
+            <input type="number" :value="sum" class="input" disabled>
+        </label>
+        <label>
+            Debug mode:
+            <input type="checkbox" v-model="debug">
+        </label>
+    </form>
+</script>
+<div id="app" class="container">
+    <Calculator class="section"></Calculator>
+</div>
+
+<script type="module">
+    import {
+        watchEffect,
+        createApp,
+        computed,
+        toRefs,
+        reactive,
+        ref,
+    } from 'vue';
+    import * as releaseApi from "./build/release.js";
+    import * as debugApi from "./build/debug.js";
+
+    const app = createApp({});
+    app.component('Calculator', {
+        template: '#calculator',
+        model: {
+            termA: 'keyup',
+            termB: 'keyup'
+        },
+        props: {
+            termA: {
+                default: 0,
+            },
+            termB: {
+                default: 0,
+            },
+        },
+        setup(props) {
+            const {
+                termA,
+                termB,
+            } = toRefs(props);
+            const debug = ref(localStorage.getItem('debug'));
+            const sum = computed(() => api.instance.add(termA.value, termB.value));
+            const api = reactive({
+                get instance () { return debug.value ? debugApi : releaseApi; },
+            });
+
+            watchEffect(() => {
+                debug.value === true
+                ? localStorage.setItem('debug', '1')
+                : localStorage.removeItem('debug');
+            });
+
+            return {
+                debug,
+                termA,
+                termB,
+                sum,
+            };
+        },
+    });
+    app.mount('#app');
+</script>
+</body>
+</html>;
